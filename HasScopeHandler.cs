@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
-namespace CalculatorApi;
 // HasScopeHandler.cs
 //
 // From: https://auth0.com/docs/quickstart/backend/aspnet-core-webapi/01-authorization

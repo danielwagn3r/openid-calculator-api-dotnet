@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Authorization;
 
-namespace CalculatorApi;
 // HasScopeRequirement.cs
 //
 // From: https://auth0.com/docs/quickstart/backend/aspnet-core-webapi/01-authorization
