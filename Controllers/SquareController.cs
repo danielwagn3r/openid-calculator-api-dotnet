@@ -1,11 +1,11 @@
-﻿using CalculatorApi.Models;
+﻿using CalcApi.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
-namespace CalculatorApi.Controllers
+namespace CalcApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class SquareController : ControllerBase
     {
@@ -16,12 +16,11 @@ namespace CalculatorApi.Controllers
             _logger = logger;
         }
 
-        // GET api/square/5
         [HttpGet("{number}")]
         [Authorize("calc:square")]
-        public ActionResult<string> Get(int number)
+        public JsonResult Get(int number)
         {
-            _logger.LogInformation("Get double of {number}", number);
+            _logger.LogInformation("Get dousquareble of {number}", number);
 
             return new JsonResult(new ResultModel { Result = number * number });
         }

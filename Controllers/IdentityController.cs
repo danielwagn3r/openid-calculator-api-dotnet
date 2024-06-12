@@ -1,23 +1,31 @@
-﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
-namespace CalculatorApi.Controllers
+namespace CalcApi.Controllers;
+
+[Route("[controller]")]
+[Authorize]
+public class IdentityController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class TokeninfoController : ControllerBase
+    private readonly ILogger _logger;
+    
+    public IdentityController(ILogger<IdentityController> logger)
     {
-        // GET api/tokeninfo
-        [HttpGet]
-        [Authorize]
-        public JsonResult Get()
+        _logger = logger;
+    }
+
+    [HttpGet]
+    public IActionResult Get()
+    {
+        HttpContext.GetTokenAsync("access_token").ContinueWith(task =>
         {
-            var bearerToken = Request.Headers["Authorization"].ToString().Split(" ")[1];
+            if (task.IsCompletedSuccessfully)
+            {
+                _logger.LogInformation("Access token: {token}", task.Result);
+            }
+        });
 
-            var token = new JwtSecurityToken(jwtEncodedString: bearerToken);
-
-            return new JsonResult(token);
-        }
+        return new JsonResult(from c in User.Claims select new { c.Type, c.Value });
     }
 }

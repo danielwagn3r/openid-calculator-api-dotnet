@@ -1,11 +1,11 @@
-﻿using CalculatorApi.Models;
+﻿using CalcApi.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
-namespace CalculatorApi.Controllers
+namespace CalcApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class DoubleController : ControllerBase
     {
@@ -16,7 +16,6 @@ namespace CalculatorApi.Controllers
             _logger = logger;
         }
 
-        // GET api/double/5
         [HttpGet("{number}")]
         [Authorize("calc:double")]
         public JsonResult Get(int number)

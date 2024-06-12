@@ -1,4 +1,4 @@
-﻿namespace CalculatorApi.Models
+﻿namespace CalcApi.Models
 {
     public class ResultModel
     {
